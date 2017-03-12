@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="titles_size">16sp</dimen>
+    <dimen name="titles_padding">16dp</dimen>
+    <dimen name="bet_size">40sp</dimen>
+    <dimen name="top_button_width">120dp</dimen>
+    <dimen name="line_margin">16dp</dimen>
+    <dimen name="dice_size">40sp</dimen>
+    <dimen name="victories_size">16sp</dimen>
+    <dimen name="button_margin">8dp</dimen>
+</resources>

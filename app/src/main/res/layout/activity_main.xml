@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="it.matteosilvestro.perudocounter.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Current bet section -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:padding="@dimen/titles_padding"
+            android:text="@string/bet_title"
+            android:textAlignment="center"
+            android:textSize="@dimen/titles_size" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:layout_width="@dimen/top_button_width"
+                    android:layout_height="wrap_content"
+                    android:onClick="incrementDiceNumber"
+                    android:text="@string/add_button" />
+
+                <TextView
+                    android:id="@+id/diceNumberText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center_horizontal"
+                    android:text="@string/default_dice_number"
+                    android:textSize="@dimen/bet_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:layout_width="@dimen/top_button_width"
+                    android:layout_height="wrap_content"
+                    android:onClick="incrementDiceValue"
+                    android:text="@string/add_button" />
+
+                <TextView
+                    android:id="@+id/diceValueText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center_horizontal"
+                    android:text="@string/default_dice_value"
+                    android:textSize="@dimen/bet_size" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="@dimen/top_button_width"
+                android:layout_height="wrap_content"
+                android:onClick="switchBetMode"
+                android:text="@string/switch_button" />
+
+            <Button
+                android:layout_width="@dimen/top_button_width"
+                android:layout_height="wrap_content"
+                android:onClick="resetBetButton"
+                android:text="@string/reset_button" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/line_margin"
+            android:layout_marginRight="@dimen/line_margin"
+            android:layout_marginTop="@dimen/line_margin"
+            android:background="@android:color/darker_gray" />
+
+        <!-- Players score section -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/line_margin"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="@dimen/titles_padding"
+                    android:text="@string/player_a"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/titles_size" />
+
+
+                <TextView
+                    android:id="@+id/diceForPlayerAText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/default_total_dice"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/dice_size" />
+
+
+                <TextView
+                    android:id="@+id/victoriesForPlayerAText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_victories"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/victories_size" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/button_margin"
+                    android:onClick="decrementDiceForPlayerA"
+                    android:text="@string/remove_button" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/line_margin"
+                android:layout_marginTop="@dimen/line_margin"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="@dimen/titles_padding"
+                    android:text="@string/player_b"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/titles_size" />
+
+
+                <TextView
+                    android:id="@+id/diceForPlayerBText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/default_total_dice"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/dice_size" />
+
+
+                <TextView
+                    android:id="@+id/victoriesForPlayerBText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_victories"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/victories_size" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/button_margin"
+                    android:onClick="decrementDiceForPlayerB"
+                    android:text="@string/remove_button" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/line_margin"
+            android:layout_marginRight="@dimen/line_margin"
+            android:background="@android:color/darker_gray" />
+
+        <!-- Button to start new match or reset all -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/line_margin"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="startNew"
+                android:text="@string/start_new" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="resetAll"
+                android:text="@string/reset_all" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
