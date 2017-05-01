@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Segnapunti per Perudo</string>
+    <string name="bet_title">Scommessa attuale</string>
+    <string name="add_button">+</string>
+    <string name="default_dice_number">uno</string>
+    <string name="default_dice_value">2</string>
+    <string name="switch_button">Cambia</string>
+    <string name="reset_button">Azzera</string>
+    <string name="player_a">Giocatore A</string>
+    <string name="player_b">Giocatore B</string>
+    <string name="default_total_dice">5 dadi</string>
+    <string name="default_victories">0 vittorie</string>
+    <string name="remove_button">Rimuovi dado</string>
+    <string name="start_new">Nuova partita</string>
+    <string name="reset_all">Ricomincia gioco</string>
+    <!-- in Java strings -->
+    <string name="one">un*</string>
+    <string name="two">due</string>
+    <string name="three">tre</string>
+    <string name="four">quattro</string>
+    <string name="five">cinque</string>
+    <string name="six">sei</string>
+    <string name="seven">sette</string>
+    <string name="eight">otto</string>
+    <string name="nine">nove</string>
+    <string name="ten">dieci</string>
+    <string name="nan">nan</string>
+    <string name="cant_switch">Non si può tornare alla modalità normale, la scommessa è troppo alta!</string>
+    <plurals name="ace">
+        <item quantity="one">testa</item>
+        <item quantity="other">teste</item>
+    </plurals>
+    <plurals name="die">
+        <item quantity="one">%d dado</item>
+        <item quantity="other">%d dadi</item>
+    </plurals>
+    <plurals name="victory">
+        <item quantity="one">%d vittoria</item>
+        <item quantity="other">%d vittorie</item>
+    </plurals>
+    <string name="wins">Vince il giocatore %s!</string>
+</resources>

@@ -1,7 +1,9 @@
 package it.matteosilvestro.perudocounter;
 
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -34,15 +36,14 @@ public class MainActivity extends AppCompatActivity {
     // --------------------------------------------------------------
 
     // Display the value of dice for the bet.
-    public void displayDiceValue(int number) {
+    public void displayDiceValue() {
         String text = "";
-        if (aceMode) {
-            text = "ace";
-            if (diceNumber > 1) {
-                text = text + "s";
-            }
+        if (aceMode) { // the bet is on aces
+            // Get the right word, singular or plural of "ace"
+            Resources res = getResources();
+            text = res.getQuantityString(R.plurals.ace, diceNumber);
         } else {
-            text = String.valueOf(number);
+            text = String.valueOf(diceValue);
         }
         TextView scoreView = (TextView) findViewById(R.id.diceValueText);
         scoreView.setText(text);
@@ -50,51 +51,53 @@ public class MainActivity extends AppCompatActivity {
 
     // Increment the value of dice for the bet and display it.
     public void incrementDiceValue(View view) {
-        if (diceValue < 6 & diceValue > 1) {
-            diceValue++;
+        if (!aceMode) {
+            if (diceValue < 6 & diceValue > 1) {
+                diceValue++;
+            }
+            displayDiceValue();
         }
-        displayDiceValue(diceValue);
     }
 
     /**
      * Display the number of dice for the bet.
      * Recall that it is not displayed the actual number but the number in words (e.g. "one" for 1)
      */
-    public void displayDiceNumber(int number) {
+    public void displayDiceNumber() {
         String numberInLetters = "";
-        switch (number) {
+        switch (diceNumber) {
             case 1:
-                numberInLetters = "one";
+                numberInLetters = getString(R.string.one);
                 break;
             case 2:
-                numberInLetters = "two";
+                numberInLetters = getString(R.string.two);
                 break;
             case 3:
-                numberInLetters = "three";
+                numberInLetters = getString(R.string.three);
                 break;
             case 4:
-                numberInLetters = "four";
+                numberInLetters = getString(R.string.four);
                 break;
             case 5:
-                numberInLetters = "five";
+                numberInLetters = getString(R.string.five);
                 break;
             case 6:
-                numberInLetters = "six";
+                numberInLetters = getString(R.string.six);
                 break;
             case 7:
-                numberInLetters = "seven";
+                numberInLetters = getString(R.string.seven);
                 break;
             case 8:
-                numberInLetters = "eight";
+                numberInLetters = getString(R.string.eight);
                 break;
             case 9:
-                numberInLetters = "nine";
+                numberInLetters = getString(R.string.nine);
                 break;
             case 10:
-                numberInLetters = "ten";
+                numberInLetters = getString(R.string.ten);
                 break;
             default:
-                numberInLetters = "nan";
+                numberInLetters = getString(R.string.nan);
                 break;
         }
         TextView scoreView = (TextView) findViewById(R.id.diceNumberText);
@@ -106,10 +109,15 @@ public class MainActivity extends AppCompatActivity {
         // the number of dice you can bet on must not be greater than the total number of dice in game
         if (diceNumber < totalDice) {
             diceNumber++;
+            if (!aceMode) {
+                diceValue = 2; // reset also the value of dice, according to bet rules.
+                displayDiceNumber();
+                displayDiceValue();
+            } else {
+                displayDiceNumber();
+                displayDiceValue();
+            }
         }
-        diceValue = 2; // reset also the value of dice, according to bet rules.
-        displayDiceNumber(diceNumber);
-        displayDiceValue(diceValue);
     }
 
     // switch from number mode to ace mode.
@@ -125,8 +133,8 @@ public class MainActivity extends AppCompatActivity {
             }
             // for us, the value of dice 1 is equivalent to an ace
             diceValue = 1;
-            displayDiceNumber(diceNumber);
-            displayDiceValue(diceValue);
+            displayDiceNumber();
+            displayDiceValue();
         } else {
             // the new number of dice must not exceed the total number of dice in game
             if (diceNumber * 2 + 1 <= totalDice) {
@@ -136,10 +144,10 @@ public class MainActivity extends AppCompatActivity {
                 diceNumber = diceNumber * 2 + 1;
                 // set the value of dice to a default 2, can be any number from 2 to 6
                 diceValue = 2;
-                displayDiceNumber(diceNumber);
-                displayDiceValue(diceValue);
+                displayDiceNumber();
+                displayDiceValue();
             } else {
-                Toast.makeText(getApplicationContext(), "Cannot switch back to normal mode, the bet is too high!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.cant_switch), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -154,30 +162,22 @@ public class MainActivity extends AppCompatActivity {
         aceMode = false;
         diceNumber = 1;
         diceValue = 2;
-        displayDiceNumber(diceNumber);
-        displayDiceValue(diceValue);
+        displayDiceNumber();
+        displayDiceValue();
     }
 
     // Display the number of dice for player A.
-    public void displayDiceForPlayerA(int number) {
-        String text = number + " ";
-        if (number == 1) {
-            text = text + "die";
-        } else {
-            text = text + "dice";
-        }
+    public void displayDiceForPlayerA() {
+        Resources res = getResources();
+        String text = res.getQuantityString(R.plurals.die, diceForPlayerA, diceForPlayerA);
         TextView diceText = (TextView) findViewById(R.id.diceForPlayerAText);
         diceText.setText(text);
     }
 
     // Display the number of victories for player A.
-    public void displayVictoriesForPlayerA(int number) {
-        String text = number + " ";
-        if (number == 1) {
-            text = text + "victory";
-        } else {
-            text = text + "victories";
-        }
+    public void displayVictoriesForPlayerA() {
+        Resources res = getResources();
+        String text = res.getQuantityString(R.plurals.victory, victoriesForPlayerA, victoriesForPlayerA);
         TextView victoriesText = (TextView) findViewById(R.id.victoriesForPlayerAText);
         victoriesText.setText(text);
     }
@@ -191,33 +191,25 @@ public class MainActivity extends AppCompatActivity {
             resetBet();
             if (diceForPlayerA == 0) {
                 victoriesForPlayerB++;
-                displayVictoriesForPlayerB(victoriesForPlayerB);
-                Toast.makeText(getApplicationContext(), "Player B wins!", Toast.LENGTH_SHORT).show();
+                displayVictoriesForPlayerB();
+                Toast.makeText(getApplicationContext(), getString(R.string.wins, "B"), Toast.LENGTH_SHORT).show();
             }
-            displayDiceForPlayerA(diceForPlayerA);
+            displayDiceForPlayerA();
         }
     }
 
     // Display the number of dice for player B.
-    public void displayDiceForPlayerB(int number) {
-        String text = number + " ";
-        if (number == 1) {
-            text = text + "die";
-        } else {
-            text = text + "dice";
-        }
+    public void displayDiceForPlayerB() {
+        Resources res = getResources();
+        String text = res.getQuantityString(R.plurals.die, diceForPlayerB, diceForPlayerB);
         TextView diceText = (TextView) findViewById(R.id.diceForPlayerBText);
         diceText.setText(text);
     }
 
     // Display the number of victories for player B.
-    public void displayVictoriesForPlayerB(int number) {
-        String text = number + " ";
-        if (number == 1) {
-            text = text + "victory";
-        } else {
-            text = text + "victories";
-        }
+    public void displayVictoriesForPlayerB() {
+        Resources res = getResources();
+        String text = res.getQuantityString(R.plurals.victory, victoriesForPlayerB, victoriesForPlayerB);
         TextView victoriesText = (TextView) findViewById(R.id.victoriesForPlayerBText);
         victoriesText.setText(text);
     }
@@ -231,11 +223,11 @@ public class MainActivity extends AppCompatActivity {
             resetBet();
             if (diceForPlayerB == 0) {
                 victoriesForPlayerA++;
-                displayVictoriesForPlayerA(victoriesForPlayerA);
-                Toast.makeText(getApplicationContext(), "Player A wins!", Toast.LENGTH_SHORT).show();
+                displayVictoriesForPlayerA();
+                Toast.makeText(getApplicationContext(), getString(R.string.wins, "A"), Toast.LENGTH_SHORT).show();
             }
         }
-        displayDiceForPlayerB(diceForPlayerB);
+        displayDiceForPlayerB();
     }
 
     // wrapper for the button start new match
@@ -247,8 +239,8 @@ public class MainActivity extends AppCompatActivity {
         diceForPlayerA = 5;
         diceForPlayerB = 5;
         totalDice = 10;
-        displayDiceForPlayerA(diceForPlayerA);
-        displayDiceForPlayerB(diceForPlayerB);
+        displayDiceForPlayerA();
+        displayDiceForPlayerB();
         resetBet();
     }
 
@@ -259,8 +251,8 @@ public class MainActivity extends AppCompatActivity {
     public void resetAll() {
         victoriesForPlayerA = 0;
         victoriesForPlayerB = 0;
-        displayVictoriesForPlayerA(victoriesForPlayerA);
-        displayVictoriesForPlayerB(victoriesForPlayerB);
+        displayVictoriesForPlayerA();
+        displayVictoriesForPlayerB();
         startNew();
     }
 

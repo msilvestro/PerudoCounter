@@ -13,4 +13,30 @@
     <string name="remove_button">Remove die</string>
     <string name="start_new">Start new match</string>
     <string name="reset_all">Reset all</string>
+    <!-- in Java strings -->
+    <string name="one">one</string>
+    <string name="two">two</string>
+    <string name="three">three</string>
+    <string name="four">four</string>
+    <string name="five">five</string>
+    <string name="six">six</string>
+    <string name="seven">seven</string>
+    <string name="eight">eight</string>
+    <string name="nine">nine</string>
+    <string name="ten">ten</string>
+    <string name="nan">nan</string>
+    <string name="cant_switch">Cannot switch back to normal mode, the bet is too high!</string>
+    <plurals name="ace">
+        <item quantity="one">ace</item>
+        <item quantity="other">aces</item>
+    </plurals>
+    <plurals name="die">
+        <item quantity="one">%d die</item>
+        <item quantity="other">%d dice</item>
+    </plurals>
+    <plurals name="victory">
+        <item quantity="one">%d victory</item>
+        <item quantity="other">%d victories</item>
+    </plurals>
+    <string name="wins">Player %s wins!</string>
 </resources>
